@@ -19,39 +19,58 @@ function FormFill({ setShowOrderModal, orderDetails, setOrderDetails }) {
   };
 
  const fetchCurrentLocation = () => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        const { latitude, longitude } = position.coords;
-
-        try {
-          const response = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`,
-            {
-              headers: {
-                'User-Agent': 'murthasaalick123@gmail.com', // Required
-              },
-            }
-          );
-          const data = await response.json();
-
-          const address = data.display_name || `Lat: ${latitude}, Lng: ${longitude}`;
-          setOrderDetails((prev) => ({
-            ...prev,
-            address,
-          }));
-        } catch (error) {
-          alert("Unable to fetch address.");
-        }
-      },
-      () => {
-        alert("Location access denied or failed.");
-      }
-    );
-  } else {
-    alert("Geolocation is not supported.");
+  if (!navigator.geolocation) {
+    alert("Geolocation is not supported by your browser.");
+    return;
   }
+
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      const { latitude, longitude } = position.coords;
+
+      try {
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`,
+          {
+            headers: {
+              "User-Agent": "murthasaalick123@gmail.com",
+            },
+          }
+        );
+
+        const data = await response.json();
+
+        const address = data.address;
+
+        // Construct a custom address string
+        const formattedAddress = [
+          address.road,
+          address.suburb,
+          address.town || address.city,
+          address.county,
+          address.state,
+          address.postcode,
+          address.country,
+        ]
+          .filter(Boolean) // remove undefined or empty values
+          .join(", ");
+
+        setOrderDetails((prev) => ({
+          ...prev,
+          address: formattedAddress,
+        }));
+      } catch (error) {
+        alert("Unable to fetch address from coordinates.");
+        console.error(error);
+      }
+    },
+    (error) => {
+      alert("Location permission denied or unavailable.");
+      console.error(error);
+    }
+  );
 };
+
 
 
   return (
