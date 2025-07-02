@@ -18,34 +18,41 @@ function FormFill({ setShowOrderModal, orderDetails, setOrderDetails }) {
     window.open(whatsappURL, '_blank');
   };
 
-  const fetchCurrentLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          const { latitude, longitude } = position.coords;
+ const fetchCurrentLocation = () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
 
-          try {
-            const response = await fetch(
-              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
-            );
-            const data = await response.json();
-            const address = data.display_name || `Lat: ${latitude}, Lng: ${longitude}`;
-            setOrderDetails((prev) => ({
-              ...prev,
-              address,
-            }));
-          } catch (error) {
-            alert("Unable to fetch address from coordinates.");
-          }
-        },
-        () => {
-          alert("Permission denied or unable to fetch location.");
+        try {
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`,
+            {
+              headers: {
+                'User-Agent': 'murthasaalick123@gmail.com', // Required
+              },
+            }
+          );
+          const data = await response.json();
+
+          const address = data.display_name || `Lat: ${latitude}, Lng: ${longitude}`;
+          setOrderDetails((prev) => ({
+            ...prev,
+            address,
+          }));
+        } catch (error) {
+          alert("Unable to fetch address.");
         }
-      );
-    } else {
-      alert("Geolocation is not supported by this browser.");
-    }
-  };
+      },
+      () => {
+        alert("Location access denied or failed.");
+      }
+    );
+  } else {
+    alert("Geolocation is not supported.");
+  }
+};
+
 
   return (
     <form className="space-y-4">
