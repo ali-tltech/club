@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Star, MapPin, Clock, Phone, X, User, MapIcon, PhoneCall, MessageCircle, ShoppingCart, Plus, Minus, Trash2 } from 'lucide-react';
 import FormFill from '../ui/FormFill';
+import Location from '../ui/Location';
 
 const KeralaFoodMenu = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -203,47 +204,9 @@ Thank you for choosing ZOC Kerala Food Cafe! 🙏`;
     : menuItems.filter(item => item.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-br  from-gray-50 to-gray-100">
       {/* Header */}
-      <header className="bg-gradient-to-r from-black to-gray-900 text-white shadow-lg">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-center md:text-left mb-4 md:mb-0">
-              <h1 className="text-4xl font-bold mb-2 text-gray-200">ZOC Kerala Food Cafe</h1>
-              <p className="text-gray-300 text-lg">Authentic Flavors of God's Own Country</p>
-            </div>
-            <div className="flex items-center space-x-4">
-              {/* Cart Icon */}
-              <button
-                onClick={() => setShowCart(true)}
-                className="relative bg-white bg-opacity-20 p-3 rounded-full hover:bg-opacity-30 transition-all duration-200"
-              >
-                <ShoppingCart size={24} className="text-white" />
-                {getCartItemCount() > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold">
-                    {getCartItemCount()}
-                  </span>
-                )}
-              </button>
-              
-              <div className="flex flex-col items-center md:items-end text-sm space-y-1">
-                <div className="flex items-center space-x-2">
-                  <MapPin size={16} />
-                  <span>Kanayannur, Kerala</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Phone size={16} />
-                  <span>+91 98765 43210</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Clock size={16} />
-                  <span>Open: 6:00 AM - 10:00 PM</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Location getCartItemCount={getCartItemCount} setShowCart={setShowCart}/>
 
       <div className="container mx-auto px-4 py-8">
         {/* Category Filter */}
