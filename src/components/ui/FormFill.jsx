@@ -3,6 +3,7 @@ import {
   MessageCircle,
   PhoneCall,
   User,
+  X
 } from 'lucide-react';
 import React, { useState } from 'react';
 
