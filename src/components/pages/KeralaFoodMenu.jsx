@@ -298,147 +298,155 @@ Thank you for choosing ZOC Kerala Food Cafe! 🙏`;
       {/* Cart Modal */}
       {showCart && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
-              {/* Cart Header */}
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold text-gray-800 flex items-center">
-                  <ShoppingCart size={24} className="mr-2" />
-                  Your Cart ({getCartItemCount()})
-                </h2>
-                <button 
-                  onClick={() => setShowCart(false)}
-                  className="text-gray-500 hover:text-gray-700"
-                >
-                  <X size={24} />
-                </button>
-              </div>
+  <div className="bg-green-50 rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-emerald-100">
+    <div className="p-6">
+      {/* Cart Header */}
+      <div className="flex justify-between items-center mb-5">
+        <h2 className="text-2xl font-bold text-emerald-800 flex items-center">
+          <ShoppingCart size={24} className="mr-2 text-emerald-600" />
+          Your Cart ({getCartItemCount()})
+        </h2>
+        <button
+          onClick={() => setShowCart(false)}
+          className="text-emerald-500 hover:text-emerald-700"
+        >
+          <X size={24} />
+        </button>
+      </div>
 
-              {/* Cart Items */}
-              {cart.length === 0 ? (
-                <div className="text-center py-8 text-gray-500">
-                  <ShoppingCart size={48} className="mx-auto mb-4 text-gray-300" />
-                  <p>Your cart is empty</p>
-                  <p className="text-sm">Add some delicious items to get started!</p>
-                </div>
-              ) : (
-                <>
-                  <div className="space-y-4 mb-6">
-                    {cart.map(item => (
-                      <div key={item.id} className="bg-gray-50 rounded-lg p-4">
-                        <div className="flex space-x-3">
-                          <img 
-                            src={item.image} 
-                            alt={item.name}
-                            className="w-16 h-16 object-cover rounded-lg"
-                          />
-                          <div className="flex-1">
-                            <h3 className="font-bold text-gray-800">{item.name}</h3>
-                            <p className="text-gray-600 text-sm">₹{item.price} each</p>
-                            <div className="flex items-center justify-between mt-2">
-                              <div className="flex items-center space-x-2">
-                                <button
-                                  onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
-                                  className="bg-gray-200 hover:bg-gray-300 rounded-full p-1"
-                                >
-                                  <Minus size={16} />
-                                </button>
-                                <span className="font-medium text-lg">{item.quantity}</span>
-                                <button
-                                  onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
-                                  className="bg-gray-200 hover:bg-gray-300 rounded-full p-1"
-                                >
-                                  <Plus size={16} />
-                                </button>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <span className="font-bold text-lg">₹{item.price * item.quantity}</span>
-                                <button
-                                  onClick={() => removeFromCart(item.id)}
-                                  className="text-red-500 hover:text-red-700"
-                                >
-                                  <Trash2 size={16} />
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+      {/* Cart Items */}
+      {cart.length === 0 ? (
+        <div className="text-center py-10 text-emerald-500">
+          <ShoppingCart size={48} className="mx-auto mb-4 text-emerald-200" />
+          <p className="font-semibold">Your cart is empty</p>
+          <p className="text-sm text-emerald-400">Add some delicious items to get started!</p>
+        </div>
+      ) : (
+        <>
+          <div className="space-y-4 mb-6">
+            {cart.map(item => (
+              <div key={item.id} className="bg-white rounded-lg p-4 shadow border border-emerald-100">
+                <div className="flex space-x-3">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-16 h-16 object-cover rounded-md border border-emerald-100"
+                  />
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-emerald-800">{item.name}</h3>
+                    <p className="text-emerald-600 text-sm">₹{item.price} each</p>
+                    <div className="flex items-center justify-between mt-3">
+                      <div className="flex items-center space-x-2">
+                        <button
+                          onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
+                          className="bg-emerald-100 hover:bg-emerald-200 rounded-full p-1 text-emerald-700"
+                        >
+                          <Minus size={16} />
+                        </button>
+                        <span className="font-medium text-lg text-emerald-800">{item.quantity}</span>
+                        <button
+                          onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
+                          className="bg-emerald-100 hover:bg-emerald-200 rounded-full p-1 text-emerald-700"
+                        >
+                          <Plus size={16} />
+                        </button>
                       </div>
-                    ))}
-                  </div>
-
-                  {/* Cart Total */}
-                  <div className="bg-gray-100 rounded-lg p-4 mb-6">
-                    <div className="flex justify-between items-center text-xl font-bold">
-                      <span>Total Amount:</span>
-                      <span>₹{getCartTotal()}</span>
+                      <div className="flex items-center space-x-2">
+                        <span className="font-bold text-emerald-800 text-lg">₹{item.price * item.quantity}</span>
+                        <button
+                          onClick={() => removeFromCart(item.id)}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
                     </div>
                   </div>
+                </div>
+              </div>
+            ))}
+          </div>
 
-                  {/* Cart Actions */}
-                  <div className="flex space-x-3">
-                    <button
-                      onClick={() => setShowCart(false)}
-                      className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
-                    >
-                      Continue Shopping
-                    </button>
-                    <button
-                      onClick={() => {
-                        setShowCart(false);
-                        setShowOrderModal(true);
-                      }}
-                      className="flex-1 bg-gradient-to-r from-gray-800 to-black text-white px-4 py-2 rounded-lg hover:from-black hover:to-gray-900 font-medium"
-                    >
-                      Checkout
-                    </button>
-                  </div>
-                </>
-              )}
+          {/* Cart Total */}
+          <div className="bg-emerald-100 rounded-lg p-4 mb-6 border border-emerald-200">
+            <div className="flex justify-between items-center text-lg font-semibold text-emerald-800">
+              <span>Total Amount:</span>
+              <span>₹{getCartTotal()}</span>
             </div>
           </div>
-        </div>
+
+          {/* Cart Actions */}
+          <div className="flex space-x-3">
+            <button
+              onClick={() => setShowCart(false)}
+              className="flex-1 px-4 py-2 border border-emerald-300 text-emerald-700 bg-white rounded-md hover:bg-emerald-100 font-medium"
+            >
+              Continue Shopping
+            </button>
+            <button
+              onClick={() => {
+                setShowCart(false);
+                setShowOrderModal(true);
+              }}
+              className="flex-1 bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700 font-medium"
+            >
+              Checkout
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  </div>
+</div>
+
       )}
 
       {/* Order Modal */}
       {showOrderModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
-              {/* Modal Header */}
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold text-gray-800">Place Your Order</h2>
-                <button 
-                  onClick={() => setShowOrderModal(false)}
-                  className="text-gray-500 hover:text-gray-700"
-                >
-                  <X size={24} />
-                </button>
-              </div>
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+  <div className="bg-green-50 rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto border border-emerald-100 shadow-2xl">
+    <div className="p-6">
+      {/* Modal Header */}
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold text-emerald-800">Place Your Order</h2>
+        <button
+          onClick={() => setShowOrderModal(false)}
+          className="text-emerald-500 hover:text-emerald-700"
+        >
+          <X size={24} />
+        </button>
+      </div>
 
-              {/* Order Summary */}
-              <div className="bg-gray-50 rounded-lg p-4 mb-6">
-                <h3 className="font-bold text-lg mb-3">Order Summary</h3>
-                <div className="space-y-2">
-                  {cart.map(item => (
-                    <div key={item.id} className="flex justify-between text-sm">
-                      <span>{item.name} x{item.quantity}</span>
-                      <span>₹{item.price * item.quantity}</span>
-                    </div>
-                  ))}
-                  <div className="border-t pt-2 mt-2">
-                    <div className="flex justify-between font-bold text-lg">
-                      <span>Total:</span>
-                      <span>₹{getCartTotal()}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Order Form */}
-              <FormFill setOrderDetails={setOrderDetails } orderDetails={orderDetails} setShowOrderModal={setShowOrderModal}/>
+      {/* Order Summary */}
+      <div className="bg-white border border-emerald-100 rounded-xl p-4 mb-6 shadow-sm">
+        <h3 className="font-bold text-lg text-emerald-800 mb-3">Order Summary</h3>
+        <div className="space-y-2 text-emerald-700">
+          {cart.map((item) => (
+            <div key={item.id} className="flex justify-between text-sm">
+              <span>{item.name} x{item.quantity}</span>
+              <span>₹{item.price * item.quantity}</span>
+            </div>
+          ))}
+          <div className="border-t border-emerald-200 pt-2 mt-2">
+            <div className="flex justify-between font-bold text-lg text-emerald-900">
+              <span>Total:</span>
+              <span>₹{getCartTotal()}</span>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Order Form */}
+      <FormFill
+        setOrderDetails={setOrderDetails}
+        orderDetails={orderDetails}
+        setShowOrderModal={setShowOrderModal}
+      />
+    </div>
+  </div>
+</div>
+
         </div>
       )}
     </div>

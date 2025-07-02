@@ -54,7 +54,7 @@ function Location({ getCartItemCount , setShowCart }) {
               <span className="block text-green-600">RESTO CAFÉ</span>
             </h1>
             
-            <p className="text-2xl text-gray-600 mb-12 leading-relaxed font-light">
+            <p className="text-2xl text-gray-600 mb-12 leading-relaxed font-light backdrop-blur-md p-2 rounded-lg">
               Experience authentic flavors and exceptional dining at Manipal's finest resto café, where every dish is crafted with passion and tradition.
             </p>
             
