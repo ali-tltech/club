@@ -78,7 +78,7 @@ function FormFill({ setShowOrderModal, orderDetails, setOrderDetails }) {
           value={orderDetails.phone}
           onChange={handleInputChange}
           placeholder="Enter your phone number"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
+          className="w-full px-3 py-2 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
           required
         />
       </div>
