@@ -1,11 +1,11 @@
-import { Clock, MapPin, Phone, ShoppingCart, Leaf ,X} from 'lucide-react'
+import { Clock, MapPin, Phone, ShoppingCart, Leaf } from 'lucide-react'
 import React from 'react'
 
-function Location({ getCartItemCount , setShowCart }) {
+function Location({ getCartItemCount, setShowCart }) {
   return (
-    <header className="relative h-screen bg-white overflow-hidden">
+    <header className="relative min-h-screen bg-white overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute top-0 right-0 w-1/2 h-full">
+      <div className="absolute top-0 right-0 w-1/2 h-full hidden sm:block">
         <div 
           className="w-full h-full bg-cover bg-center"
           style={{
@@ -16,53 +16,92 @@ function Location({ getCartItemCount , setShowCart }) {
         <div className="absolute inset-0 bg-gradient-to-l from-green-600/80 to-transparent"></div>
       </div>
       
-     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-  <div className="bg-green-50 rounded-xl w-full max-w-md max-h-[90vh] overflow-y-auto border border-emerald-100 shadow-2xl">
-    <div className="p-4 sm:p-6">
-      {/* Modal Header */}
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl sm:text-2xl font-bold text-emerald-800">
-          Place Your Order
-        </h2>
-        <button
-          onClick={() => setShowOrderModal(false)}
-          className="text-emerald-500 hover:text-emerald-700"
-        >
-          <X size={20} className="sm:size-6" />
-        </button>
-      </div>
-
-      {/* Order Summary */}
-      <div className="bg-white border border-emerald-100 rounded-lg p-4 mb-6 shadow-sm">
-        <h3 className="font-bold text-base sm:text-lg text-emerald-800 mb-3">
-          Order Summary
-        </h3>
-        <div className="space-y-2 text-sm sm:text-base text-emerald-700">
-          {cart.map((item) => (
-            <div key={item.id} className="flex justify-between">
-              <span>{item.name} x{item.quantity}</span>
-              <span>₹{item.price * item.quantity}</span>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 h-full flex flex-col">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-10 sm:mb-16">
+          <div className="flex items-center space-x-3">
+            <div className="bg-green-600 p-3 rounded-2xl">
+              <Leaf className="text-white" size={24} />
             </div>
-          ))}
-          <div className="border-t border-emerald-200 pt-2 mt-2">
-            <div className="flex justify-between font-bold text-base sm:text-lg text-emerald-900">
-              <span>Total:</span>
-              <span>₹{getCartTotal()}</span>
+            <div>
+              <h2 className="font-bold text-xl text-gray-900">ZOC</h2>
+              <p className="text-sm text-gray-600">Resto Café</p>
+            </div>
+          </div>
+          
+          <button 
+            onClick={() => setShowCart && setShowCart(true)}
+            className="relative bg-gray-100 hover:bg-gray-200 p-3 sm:p-4 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            <ShoppingCart size={20} className="text-gray-700" />
+            {getCartItemCount() > 0 && (
+              <span className="absolute -top-2 -right-2 bg-green-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+                {getCartItemCount()}
+              </span>
+            )}
+          </button>
+        </div>
+
+        {/* Main Content */}
+        <div className="flex-1 flex items-center">
+          <div className="max-w-3xl">
+            <div className="bg-green-100 text-green-800 px-4 py-2 rounded-full inline-block mb-6 sm:mb-8 font-semibold text-sm sm:text-base">
+              ✨ Fresh • Authentic • Delicious
+            </div>
+            
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black mb-6 sm:mb-8 text-gray-900 leading-tight sm:leading-none">
+              ZOC
+              <span className="block text-green-600">RESTO CAFÉ</span>
+            </h1>
+            
+            <p className="text-lg sm:text-2xl text-gray-600 mb-10 sm:mb-12 leading-relaxed font-light">
+              Experience authentic flavors and exceptional dining at Manipal's finest resto café, where every dish is crafted with passion and tradition.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-10 sm:mb-16">
+              <button className="bg-green-600 hover:bg-green-700 text-white px-10 py-4 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105 shadow-xl">
+                Explore Menu
+              </button>
+              <button className="border-2 border-gray-300 text-gray-700 hover:border-green-600 hover:text-green-600 px-10 py-4 rounded-2xl font-bold text-lg transition-all duration-300">
+                Book Table
+              </button>
+            </div>
+            
+            {/* Contact Info */}
+            <div className="flex flex-col sm:flex-row flex-wrap gap-6 pt-6 border-t border-gray-200">
+              <div className="flex items-start space-x-3">
+                <div className="bg-green-100 p-2 rounded-lg">
+                  <MapPin size={20} className="text-green-600" />
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">Mandavi Emerald Complex</p>
+                  <p className="text-gray-600 text-sm">Vidyaratna Nagar, Manipal</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-3">
+                <div className="bg-green-100 p-2 rounded-lg">
+                  <Phone size={20} className="text-green-600" />
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">+91 6364 565 316</p>
+                  <p className="text-gray-600 text-sm">Call for reservations</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start space-x-3">
+                <div className="bg-green-100 p-2 rounded-lg">
+                  <Clock size={20} className="text-green-600" />
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">Open • Closes 11 PM</p>
+                  <p className="text-gray-600 text-sm">Daily service</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Order Form */}
-      <FormFill
-        setOrderDetails={setOrderDetails}
-        orderDetails={orderDetails}
-        setShowOrderModal={setShowOrderModal}
-      />
-    </div>
-  </div>
-</div>
-
     </header>
   )
 }

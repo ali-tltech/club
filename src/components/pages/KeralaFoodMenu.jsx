@@ -206,7 +206,7 @@ Thank you for choosing ZOC Kerala Food Cafe! 🙏`;
   return (
     <div className="min-h-screen bg-gradient-to-br  from-gray-50 to-gray-100">
       {/* Header */}
-      <Location getCartItemCount={getCartItemCount} setShowCart={setShowCart}/>
+      <Location getCartItemCount={getCartItemCount} setShowCart={setShowCart} cart={cart}/>
 
       <div className="container mx-auto px-4 py-8">
         {/* Category Filter */}
