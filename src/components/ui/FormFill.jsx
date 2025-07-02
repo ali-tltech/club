@@ -15,16 +15,28 @@ function FormFill({ setShowOrderModal, orderDetails, setOrderDetails }) {
     setOrderDetails((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmitOrder = () => {
-    if (!orderDetails.name || !orderDetails.phone || !orderDetails.address) {
-      alert('Please fill in all required fields including the address.');
-      return;
-    }
+const handleSubmitOrder = () => {
+  if (!orderDetails.name || !orderDetails.phone || !orderDetails.address) {
+    alert('Please fill in all required fields including the address.');
+    return;
+  }
 
-    const message = `Order Details:\nName: ${orderDetails.name}\nPhone: ${orderDetails.phone}\nAddress: ${orderDetails.address}\nInstructions: ${orderDetails.specialInstructions || 'None'}`;
-    const whatsappURL = `https://wa.me/918086229572?text=${encodeURIComponent(message)}`;
-    window.open(whatsappURL, '_blank');
-  };
+  let message = `🧾 *Order Summary*%0A`;
+  cartItems.forEach((item, index) => {
+    const itemTotal = item.quantity * item.price;
+    message += `${index + 1}. ${item.name} x ${item.quantity} = ₹${itemTotal}%0A`;
+  });
+
+  const totalAmount = cartItems.reduce((sum, item) => sum + item.quantity * item.price, 0);
+  message += `%0A*Total:* ₹${totalAmount}%0A`;
+
+  message += `%0A*Customer Details*%0AName: ${orderDetails.name}%0APhone: ${orderDetails.phone}%0AAddress: ${orderDetails.address}%0A`;
+  message += `Instructions: ${orderDetails.specialInstructions || 'None'}`;
+
+  const whatsappURL = `https://wa.me/918086229572?text=${message}`;
+  window.open(whatsappURL, '_blank');
+};
+
 
   const fetchCurrentLocation = () => {
     if (!navigator.geolocation) {
