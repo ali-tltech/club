@@ -165,20 +165,22 @@ Please confirm this registration and provide further details about payment and m
   }
 
   return (
-    <div  style={{
-    // backgroundImage: `url(${bg})`,
+    <div  
+     style={{
+    backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${bg})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-  }} className="min-h-screen bg-white  py-8 px-4">
+  }}
+    className="min-h-screen bg-white  py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center mx-auto mb-4">
             <Utensils className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-black mb-2">Restaurant Mess Registration</h1>
-          <p className="text-gray-600 text-lg">Join our dining community and enjoy delicious meals daily</p>
+          <h1 className="text-4xl font-bold text-white mb-2">ZOC Resto Cafe || Mess Registration</h1>
+          <p className="text-gray-200 text-lg">Join our dining community and enjoy delicious meals daily</p>
         </div>
 
         {/* Registration Form */}
