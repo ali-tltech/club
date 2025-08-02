@@ -8,11 +8,12 @@ import Matches from './components/section/Matches';
 import News from './components/section/News';
 import Footer from './components/ui/Footer';
 import KeralaFoodMenu from './components/pages/KeralaFoodMenu';
+import MessRegistration from './components/pages/MessReginstration';
 
 function App() {
   return (
     <div className="bg-black text-white font-sans">
-     <KeralaFoodMenu/>
+     <MessRegistration/>
     </div>
   );
 }
