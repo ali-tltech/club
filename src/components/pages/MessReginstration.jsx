@@ -169,9 +169,9 @@ Thank you for choosing our Onam Sadhya service! 🙏`;
         <div className="absolute bottom-20 right-10 text-6xl">🌸</div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 relative z-10">
+      <div className="container mx-auto px-2 py-2 relative z-10">
         {/* Header */}
-        <header className="text-center mb-12 bg-gray-900 bg-opacity-80 backdrop-blur-lg rounded-3xl p-8 shadow-2xl border border-green-500 border-opacity-40">
+        <header className="text-center mb-12 bg-gray-900 bg-opacity-80 backdrop-blur-lg rounded-3xl p-2 shadow-2xl border border-green-500 border-opacity-40">
           <h1 className="text-5xl md:text-6xl font-bold text-green-400 mb-4 drop-shadow-lg">
             🌿 Onam Sadhya Booking 🌿
           </h1>
@@ -410,7 +410,7 @@ Thank you for choosing our Onam Sadhya service! 🙏`;
         </div>
       )}
     </div>
-    
+
   );
 };
 
