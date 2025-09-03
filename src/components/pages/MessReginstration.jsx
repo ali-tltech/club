@@ -110,7 +110,7 @@ ${formData.special ? `📝 Special Requests: ${formData.special}` : ''}
 Thank you for choosing our Onam Sadhya service! 🙏`;
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappURL = `https://wa.me/918086229572?text=${encodedMessage}`;
+    const whatsappURL = `https://wa.me/916364565316?text=${encodedMessage}`;
 
     setShowSuccess(true);
     setTimeout(() => {
@@ -308,7 +308,7 @@ Thank you for choosing our Onam Sadhya service! 🙏`;
               <h3 className="text-lg font-bold text-green-400 mb-4">Contact Information</h3>
               <div className="grid md:grid-cols-3 gap-4 text-sm">
                 <div className="flex items-center justify-center gap-2 hover:text-green-200 transition-colors">
-                  <Phone className="w-4 h-4 text-green-400" /> +91 80862-29575
+                  <Phone className="w-4 h-4 text-green-400" /> +91 6364 565 316
                 </div>
                 <div className="flex items-center justify-center gap-2 hover:text-green-200 transition-colors">
                   <Mail className="w-4 h-4 text-green-400" /> onam@sadhya.com
