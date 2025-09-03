@@ -329,7 +329,7 @@ Thank you for choosing our Onam Sadhya service! 🙏`;
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
-          <div className="bg-gray-950 rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto border border-green-600 shadow-2xl">
+          <div className="bg-gray-950 rounded-3xl  w-full max-h-[100vh] overflow-y-auto border border-green-600 shadow-2xl">
             <div className="sticky top-0 bg-gradient-to-r from-gray-900 to-black p-6 border-b border-green-700 flex justify-between items-center rounded-t-3xl">
               <h3 className="text-3xl font-bold text-green-400 flex items-center gap-2">
                 🍛 Our Sadhya Menu
@@ -343,7 +343,7 @@ Thank you for choosing our Onam Sadhya service! 🙏`;
             </div>
             
             <div className="p-6">
-             <img className='h-72 w-auto' src={bg} alt="" />
+             <img className='h-auto w-full' src={bg} alt="" />
             </div>
           </div>
         </div>
