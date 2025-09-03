@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Eye, Phone, Mail, MapPin, Clock, Users, Calendar, Navigation } from 'lucide-react';
-
+import bg from '../../assets/bg.jpg'
 const SadhyaBooking = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -404,7 +404,7 @@ Thank you for choosing our Onam Sadhya service! 🙏`;
             </div>
             
             <div className="p-6">
-             <img className='h-72 w-auto' src="https://i.pinimg.com/originals/54/b9/e5/54b9e54ef74999bc830e1b0f60d163f4.jpg" alt="" />
+             <img className='h-72 w-auto' src={bg} alt="" />
             </div>
           </div>
         </div>
