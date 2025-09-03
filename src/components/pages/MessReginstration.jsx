@@ -185,7 +185,7 @@ Thank you for choosing our Onam Sadhya service! 🙏`;
 
         {/* Form */}
         <div className="max-w-4xl mx-auto">
-          <div className="bg-gray-950 bg-opacity-90 rounded-3xl shadow-2xl p-8 border border-green-600">
+          <div className="bg-gray-950 bg-opacity-90 rounded-3xl shadow-2xl p-2 border border-green-600">
 
             <div className="text-center mb-8">
               <button
