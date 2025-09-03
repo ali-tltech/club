@@ -5,11 +5,8 @@ const SadhyaBooking = () => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    email: '',
     date: '',
-    time: '',
     guests: '',
-    type: '',
     address: '',
     special: ''
   });
@@ -37,7 +34,6 @@ const SadhyaBooking = () => {
         const { latitude, longitude } = position.coords;
         
         try {
-          // Using a free geocoding service (Nominatim by OpenStreetMap)
           const response = await fetch(
             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`
           );
@@ -51,7 +47,6 @@ const SadhyaBooking = () => {
               });
             }
           } else {
-            // Fallback: use coordinates if geocoding fails
             const coordinatesAddress = `Coordinates: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
             setFormData({
               ...formData,
@@ -59,7 +54,6 @@ const SadhyaBooking = () => {
             });
           }
         } catch (error) {
-          // Fallback: use coordinates if there's an error
           const coordinatesAddress = `Coordinates: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
           setFormData({
             ...formData,
@@ -99,7 +93,7 @@ const SadhyaBooking = () => {
   };
 
   const handleSubmit = () => {
-    if (!formData.name || !formData.phone || !formData.date || !formData.time || !formData.guests || !formData.type || !formData.address) {
+    if (!formData.name || !formData.phone || !formData.date || !formData.guests || !formData.address) {
       alert('Please fill in all required fields');
       return;
     }
@@ -108,11 +102,8 @@ const SadhyaBooking = () => {
 
 👤 Name: ${formData.name}
 📱 Phone: ${formData.phone}
-${formData.email ? `📧 Email: ${formData.email}` : ''}
 📅 Date: ${formData.date}
-🕐 Time: ${formData.time}
 👥 Quantity: ${formData.guests}
-🍛 Type: ${formData.type}
 📍 Address: ${formData.address}
 ${formData.special ? `📝 Special Requests: ${formData.special}` : ''}
 
@@ -127,7 +118,7 @@ Thank you for choosing our Onam Sadhya service! 🙏`;
     }, 1000);
     setTimeout(() => {
       setFormData({
-        name: '', phone: '', email: '', date: '', time: '', guests: '', type: '', address: '', special: ''
+        name: '', phone: '', date: '', guests: '', address: '', special: ''
       });
       setShowSuccess(false);
     }, 3000);
@@ -234,17 +225,6 @@ Thank you for choosing our Onam Sadhya service! 🙏`;
                 </div>
                 
                 <div className="relative">
-                  <input 
-                    type="email" 
-                    name="email" 
-                    value={formData.email} 
-                    onChange={handleInputChange} 
-                    placeholder="Email (Optional)" 
-                    className="w-full px-4 py-3 border-2 border-green-700 rounded-xl focus:border-green-400 focus:outline-none bg-black text-green-300 transition-colors"
-                  />
-                </div>
-
-                <div className="relative">
                   <input
                     type="date"
                     name="date"
@@ -258,21 +238,6 @@ Thank you for choosing our Onam Sadhya service! 🙏`;
                   <div className="text-xs text-green-300 mt-1 opacity-75">
                     Onam Day: September 5th, 2025
                   </div>
-                </div>
-
-                <div className="relative">
-                  <select 
-                    name="time" 
-                    value={formData.time} 
-                    onChange={handleInputChange} 
-                    className="w-full px-4 py-3 border-2 border-green-700 rounded-xl focus:border-green-400 focus:outline-none bg-black text-green-300 transition-colors"
-                    required
-                  >
-                    <option value="">Select Time Slot *</option>
-                    <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
-                    <option value="12:00 PM - 1:00 PM">12:00 PM - 1:00 PM</option>
-                    <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
-                  </select>
                 </div>
                 
                 <div className="relative">
@@ -288,21 +253,6 @@ Thank you for choosing our Onam Sadhya service! 🙏`;
                     required
                   />
                 </div>
-              </div>
-
-              <div className="relative">
-                <select 
-                  name="type" 
-                  value={formData.type} 
-                  onChange={handleInputChange} 
-                  className="w-full px-4 py-3 border-2 border-green-700 rounded-xl focus:border-green-400 focus:outline-none bg-black text-green-300 transition-colors"
-                  required
-                >
-                  <option value="">Select Sadhya Type *</option>
-                  <option value="Traditional Sadhya (₹450)">Traditional Sadhya - ₹450 per plate</option>
-                  <option value="Premium Sadhya (₹650)">Premium Sadhya - ₹650 per plate</option>
-                  <option value="Royal Sadhya (₹850)">Royal Sadhya - ₹850 per plate</option>
-                </select>
               </div>
 
               <div className="relative">
@@ -351,17 +301,6 @@ Thank you for choosing our Onam Sadhya service! 🙏`;
               >
                 🚀 Book My Sadhya Now
               </button>
-
-              {formData.guests && formData.type && (
-                <div className="bg-gradient-to-r from-green-900 to-emerald-900 p-4 rounded-xl text-center border border-green-600">
-                  <div className="text-green-200 text-lg font-semibold">
-                    Estimated Total: ₹{(parseInt(formData.guests) * parseInt(formData.type.match(/₹(\d+)/)?.[1] || 0)).toLocaleString()}
-                  </div>
-                  <div className="text-xs text-green-300 mt-1 opacity-75">
-                    Final amount will be confirmed via WhatsApp
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Contact Info */}
