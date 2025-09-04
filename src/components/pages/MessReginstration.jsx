@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { X, Eye, Phone, Mail, MapPin, Clock, Users, Calendar, Navigation } from 'lucide-react';
+import { X, Eye, Phone, Mail, MapPin, Calendar, Navigation } from 'lucide-react';
 import bg from '../../assets/bg.jpg'
+
 const SadhyaBooking = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -11,7 +12,7 @@ const SadhyaBooking = () => {
     special: ''
   });
   const [showModal, setShowModal] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [loadingRedirect, setLoadingRedirect] = useState(false); // 🔥 replaced showSuccess with loadingRedirect
   const [locationLoading, setLocationLoading] = useState(false);
 
   const handleInputChange = (e) => {
@@ -47,17 +48,15 @@ const SadhyaBooking = () => {
               });
             }
           } else {
-            const coordinatesAddress = `Coordinates: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
             setFormData({
               ...formData,
-              address: coordinatesAddress
+              address: `Coordinates: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`
             });
           }
         } catch (error) {
-          const coordinatesAddress = `Coordinates: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
           setFormData({
             ...formData,
-            address: coordinatesAddress
+            address: `Coordinates: ${latitude.toFixed(6)}, ${longitude.toFixed(6)}`
           });
         }
         
@@ -112,41 +111,20 @@ Thank you for choosing our Onam Sadhya service! 🙏`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappURL = `https://wa.me/916364565316?text=${encodedMessage}`;
 
-    setShowSuccess(true);
+    // 🔥 Show full-screen modal loader
+    setLoadingRedirect(true);
+
     setTimeout(() => {
       window.open(whatsappURL, '_blank');
-    }, 1000);
+    }, 2000);
+
     setTimeout(() => {
       setFormData({
         name: '', phone: '', date: '', guests: '', address: '', special: ''
       });
-      setShowSuccess(false);
-    }, 3000);
+      setLoadingRedirect(false);
+    }, 4000);
   };
-
-  const sadhyaItems = [
-    { 
-      id: 1, 
-      name: 'Traditional Sadhya', 
-      price: '₹450', 
-      image: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=400&h=300&fit=crop', 
-      items: ['Rice', 'Sambar', 'Rasam', 'Avial', 'Thoran', 'Pickle', 'Papadam'] 
-    },
-    { 
-      id: 2, 
-      name: 'Premium Sadhya', 
-      price: '₹650', 
-      image: 'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop', 
-      items: ['All Traditional items', 'Fish Curry', 'Prawns Fry', 'Banana Chips', 'Payasam'] 
-    },
-    { 
-      id: 3, 
-      name: 'Royal Sadhya', 
-      price: '₹850', 
-      image: 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&h=300&fit=crop', 
-      items: ['25+ dishes', 'Special curries', 'Multiple payasams', 'Premium ingredients', 'Exclusive items'] 
-    }
-  ];
 
   const today = new Date().toISOString().split('T')[0];
 
@@ -190,13 +168,6 @@ Thank you for choosing our Onam Sadhya service! 🙏`;
             <h2 className="text-3xl font-bold text-green-400 mb-8 text-center flex items-center justify-center gap-2">
               <Calendar className="w-8 h-8" /> Book Your Sadhya
             </h2>
-
-            {showSuccess && (
-              <div className="bg-gradient-to-r from-green-600 to-emerald-500 text-black p-6 rounded-2xl mb-8 text-center shadow-lg animate-pulse">
-                <h3 className="text-xl font-bold mb-2">✅ Booking Confirmed!</h3>
-                <p>Your booking details are being sent via WhatsApp. Please wait...</p>
-              </div>
-            )}
 
             <div className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
@@ -326,10 +297,10 @@ Thank you for choosing our Onam Sadhya service! 🙏`;
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Menu Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center p-4 z-50 backdrop-blur-sm">
-          <div className="bg-gray-950 rounded-3xl  w-full max-h-[100vh] overflow-y-auto border border-green-600 shadow-2xl">
+          <div className="bg-gray-950 rounded-3xl w-full max-h-[100vh] overflow-y-auto border border-green-600 shadow-2xl">
             <div className="sticky top-0 bg-gradient-to-r from-gray-900 to-black p-6 border-b border-green-700 flex justify-between items-center rounded-t-3xl">
               <h3 className="text-3xl font-bold text-green-400 flex items-center gap-2">
                 🍛 Our Sadhya Menu
@@ -343,13 +314,22 @@ Thank you for choosing our Onam Sadhya service! 🙏`;
             </div>
             
             <div className="p-6">
-             <img className='h-auto w-full' src={bg} alt="" />
+              <img className='h-auto w-full' src={bg} alt="" />
             </div>
           </div>
         </div>
       )}
-    </div>
 
+      {/* 🔥 Full-screen Loading Modal */}
+      {loadingRedirect && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90">
+          <div className="flex flex-col items-center space-y-4">
+            <div className="w-16 h-16 border-4 border-green-400 border-t-transparent rounded-full animate-spin"></div>
+            <p className="text-green-300 text-xl font-semibold animate-pulse">Redirecting to WhatsApp...</p>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
